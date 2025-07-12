@@ -1,36 +1,43 @@
-import Body from "./body"
-import { Link } from 'react-router-dom';
-import Contact from "./Email";
+import { useContext } from 'react';
+import { ThemeContext } from './ThemeContext';
+import Body from './body';
+import About from './About';
+import Contact from './Email';
 
-import About from "./About";
-function Header(){
+function Header() {
+  const { theme, toggleTheme } = useContext(ThemeContext);
 
+  return (
+    <div>
+      <header className="header-container">
+     
+        <button onClick={toggleTheme} className="theme-toggle-btn">
+          {theme === 'dark' ? 'Light Mode ☀️' : 'Dark Mode 🌙'}
+        </button>
 
-    return(
-        <div>
-        <div className="header-container" >
-           
-                <h1>Filani Henry  <span>Samuel</span> portfoilo<br />
-                
-                {/* <Link to="/contact"> */}
-                <div >
-                        {/* <button id='but' >Contact Me</button> */}
-                        <a href="#Contact" ><button id='but' >Contact Me</button> </a>
-                        </div>
-                      {/* </Link> */}
-                        
-            <a href="#About">
-                 <button id="contact">work!</button>
+        <div className="header-text">
+          <h1>
+            Filani Henry <span>Samuel</span>
+          </h1>
+          <p>Front-End Developer & Designer Portfolio</p>
+
+          <div className="header-buttons">
+            <a href="#Contact">
+              <button className="primary-btn">Contact Me</button>
             </a>
-               
-                </h1>
-                
+            <a href="#About">
+              <button className="secondary-btn">View Work</button>
+            </a>
+          </div>
         </div>
-        <Body/>
-        <About/>
-        <Contact/>
-        </div>
-    )
+      </header>
+
+      {/* Portfolio Sections */}
+      <Body />
+      <About />
+      <Contact />
+    </div>
+  );
 }
 
-export default Header 
+export default Header;
